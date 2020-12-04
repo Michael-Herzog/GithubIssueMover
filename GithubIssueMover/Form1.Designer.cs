@@ -54,6 +54,9 @@
             this.chkDeleteExistingLabels = new System.Windows.Forms.CheckBox();
             this.chkCopyIssues = new System.Windows.Forms.CheckBox();
             this.chkCreateOriginalShortcut = new System.Windows.Forms.CheckBox();
+            this.chkCloseMoved = new System.Windows.Forms.CheckBox();
+            this.chkMoveCommentlessOnly = new System.Windows.Forms.CheckBox();
+            this.chkMoveOpenOnly = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -297,11 +300,44 @@
             this.chkCreateOriginalShortcut.Text = "Create shortcut to original issue (as comment)";
             this.chkCreateOriginalShortcut.UseVisualStyleBackColor = true;
             // 
+            // chkCloseMoved
+            // 
+            this.chkCloseMoved.AutoSize = true;
+            this.chkCloseMoved.Location = new System.Drawing.Point(12, 281);
+            this.chkCloseMoved.Name = "chkCloseMoved";
+            this.chkCloseMoved.Size = new System.Drawing.Size(119, 17);
+            this.chkCloseMoved.TabIndex = 10;
+            this.chkCloseMoved.Text = "Close moved issues";
+            this.chkCloseMoved.UseVisualStyleBackColor = true;
+            // 
+            // chkMoveCommentlessOnly
+            // 
+            this.chkMoveCommentlessOnly.AutoSize = true;
+            this.chkMoveCommentlessOnly.Location = new System.Drawing.Point(13, 305);
+            this.chkMoveCommentlessOnly.Name = "chkMoveCommentlessOnly";
+            this.chkMoveCommentlessOnly.Size = new System.Drawing.Size(196, 17);
+            this.chkMoveCommentlessOnly.TabIndex = 11;
+            this.chkMoveCommentlessOnly.Text = "Only move issues without comments";
+            this.chkMoveCommentlessOnly.UseVisualStyleBackColor = true;
+            // 
+            // chkMoveOpenOnly
+            // 
+            this.chkMoveOpenOnly.AutoSize = true;
+            this.chkMoveOpenOnly.Location = new System.Drawing.Point(12, 329);
+            this.chkMoveOpenOnly.Name = "chkMoveOpenOnly";
+            this.chkMoveOpenOnly.Size = new System.Drawing.Size(135, 17);
+            this.chkMoveOpenOnly.TabIndex = 12;
+            this.chkMoveOpenOnly.Text = "Only move open issues";
+            this.chkMoveOpenOnly.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.chkMoveOpenOnly);
+            this.Controls.Add(this.chkMoveCommentlessOnly);
+            this.Controls.Add(this.chkCloseMoved);
             this.Controls.Add(this.chkCreateOriginalShortcut);
             this.Controls.Add(this.chkCopyIssues);
             this.Controls.Add(this.chkDeleteExistingLabels);
@@ -352,6 +388,9 @@
         private System.Windows.Forms.CheckBox chkDeleteExistingLabels;
         private System.Windows.Forms.CheckBox chkCopyIssues;
         private System.Windows.Forms.CheckBox chkCreateOriginalShortcut;
+        private System.Windows.Forms.CheckBox chkCloseMoved;
+        private System.Windows.Forms.CheckBox chkMoveCommentlessOnly;
+        private System.Windows.Forms.CheckBox chkMoveOpenOnly;
     }
 }
 

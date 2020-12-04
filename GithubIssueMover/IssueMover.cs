@@ -91,16 +91,24 @@ namespace GithubIssueMover
             var settings = Properties.Settings.Default;
             var client = GetGitHubClient(settings.SourceUrl, settings.SourceName, settings.SourceToken);
             var targetClient = GetGitHubClient(settings.TargetUrl, settings.TargetName, settings.TargetToken);
+            var filterState = ItemStateFilter.All;
+
+            if (settings.MoveOpenOnly)
+                filterState = ItemStateFilter.Open;
 
             var issues = await client.Issue.GetAllForRepository(
                 settings.SourceOwner,
                 settings.SourceName,
-                new RepositoryIssueRequest { State = ItemStateFilter.All },
+                new RepositoryIssueRequest { State = filterState },
                 new ApiOptions { PageSize = 100 }
             );
 
-            foreach (var issue in issues)
+            foreach (var issue in issues.Reverse())
             {
+                // Skip all issues with comments if corresponding option was set.
+                if (settings.MoveCommentlessIssuesOnly && issue.Comments > 0)
+                    continue;
+
                 var newIssue = new NewIssue(issue.Title);
                 newIssue.Body = issue.Body;
 
@@ -127,13 +135,32 @@ namespace GithubIssueMover
                 var issueUpdate = currentIssue.ToUpdate();
                 issueUpdate.State = issue.State.Value;
                 await targetClient.Issue.Update(settings.TargetOwner, settings.TargetName, currentIssue.Number, issueUpdate);
-
+            
                 // Add original issue url as comment
                 if (settings.CreateOriginalShortcut)
                 {
                     var ctask = targetClient.Issue.Comment.Create(settings.TargetOwner, settings.TargetName, currentIssue.Number, "Original Issue: " + issue.HtmlUrl);
                     _ = await ctask;
                 }
+
+                if (settings.CloseMovedIssues)
+                {
+                    var origIssueUpdate = issue.ToUpdate();
+                    origIssueUpdate.State = ItemState.Closed;
+
+                    // Set label > TODO: Make option
+                    var movedLabel = client.Issue.Labels.Get(settings.SourceOwner, settings.SourceName, "Moved");
+                    if (movedLabel == null)
+                    {
+                        await client.Issue.Labels.Create(settings.SourceOwner, settings.SourceName, new NewLabel("Moved", "#cccccc"));
+                    }
+
+                    await client.Issue.Labels.AddToIssue(settings.SourceOwner, settings.SourceName, issue.Number, new string[] { "Moved" });
+
+                    var ctask = client.Issue.Update(settings.SourceOwner, settings.SourceName, issue.Number, origIssueUpdate);
+                    _ = await ctask;
+                }
+
             }
         }
     }

@@ -178,5 +178,41 @@ namespace GithubIssueMover.Properties {
                 this["CreateOriginalShortcut"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CloseMovedIssues {
+            get {
+                return ((bool)(this["CloseMovedIssues"]));
+            }
+            set {
+                this["CloseMovedIssues"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MoveCommentlessIssuesOnly {
+            get {
+                return ((bool)(this["MoveCommentlessIssuesOnly"]));
+            }
+            set {
+                this["MoveCommentlessIssuesOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MoveOpenOnly {
+            get {
+                return ((bool)(this["MoveOpenOnly"]));
+            }
+            set {
+                this["MoveOpenOnly"] = value;
+            }
+        }
     }
 }

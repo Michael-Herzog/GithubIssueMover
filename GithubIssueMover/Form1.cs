@@ -38,6 +38,9 @@ namespace GithubIssueMover
             chkCopyLabels.DataBindings.Add("Checked", Properties.Settings.Default, "CopyLabels", true, DataSourceUpdateMode.OnPropertyChanged);
             chkCreateOriginalShortcut.DataBindings.Add("Checked", Properties.Settings.Default, "CreateOriginalShortcut", true, DataSourceUpdateMode.OnPropertyChanged);
             chkDeleteExistingLabels.DataBindings.Add("Checked", Properties.Settings.Default, "DeleteExistingLabels", true, DataSourceUpdateMode.OnPropertyChanged);
+            chkCloseMoved.DataBindings.Add("Checked", Properties.Settings.Default, "CloseMovedIssues", true, DataSourceUpdateMode.OnPropertyChanged);
+            chkMoveCommentlessOnly.DataBindings.Add("Checked", Properties.Settings.Default, "MoveCommentlessIssuesOnly", true, DataSourceUpdateMode.OnPropertyChanged);
+            chkMoveOpenOnly.DataBindings.Add("Checked", Properties.Settings.Default, "MoveOpenOnly", true, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
